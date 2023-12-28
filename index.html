@@ -8,30 +8,52 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body class="m-4 h-full">
-    <div class="space-y-2">
-      <div class="bg-green-400 p-2 text-3xl font-bold rounded-md">
-        <h1 class="text-blue-600">Learn Vue by Laracast</h1>
+    <div id="app">
+      <div class="space-y-2">
+        <div class="bg-green-400 p-2 text-3xl font-bold rounded-md">
+          <h1 class="text-blue-600">Learn Vue by Laracast</h1>
+        </div>
+        <p class="bg-blue-300 px-2 py-1 rounded-md text-slate-500">
+          Author : Jeffrey Way
+        </p>
       </div>
-      <p class="bg-blue-300 px-2 py-1 rounded-md text-slate-500">
-        Author : Jeffrey Way
-      </p>
-    </div>
-
-    <div class="mt-4 bg-green-100 rounded-md py-4 px-2">
-      <h2 class="font-bold mb-2">Lists :</h2>
-      <ul>
-        <li><a href="/pages/1-basic.html">1. Absolute Basic</a></li>
-        <li>
-          <a href="/pages/2-classAttrBinding.html">
-            2. Class and Attribute Binding
-          </a>
-        </li>
-        <li>
-          <a href="/pages/3-listConditionalComputed.html">
-            3. Lists, Conditional and Computed Properties
-          </a>
-        </li>
-      </ul>
+      <div class="mt-4 bg-green-100 rounded-md py-4 px-2">
+        <h2 class="font-bold mb-2">Lists :</h2>
+        <ul>
+          <li v-for="link in links" class="hover:font-bold hover:text-blue-500">
+            {{ link.id }}.
+            <a :href="link.path">{{ link.name }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </body>
+
+  <script>
+    let app = {
+      data() {
+        return {
+          links: [
+            { id: 1, name: "Absolute Basic", path: "/pages/1-basic.html" },
+            {
+              id: 2,
+              name: "Class and Attribute Binding",
+              path: "/pages/2-classAttrBinding.html",
+            },
+            {
+              id: 3,
+              name: "Lists, Conditional and Computed Properties",
+              path: "/pages/3-listConditionalComputed.html",
+            },
+            {
+              id: 4,
+              name: "Our First Component",
+              path: "/pages/4-firstComponent.html",
+            },
+          ],
+        };
+      },
+    };
+    Vue.createApp(app).mount("#app");
+  </script>
 </html>
