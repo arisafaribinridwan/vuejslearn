@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body class="h-full grid place-items-center">
+    <div id="app" class="bg-violet-300 p-4 rounded-xl">
+      <div class="mb-4 flex items-center justify-between gap-4">
+        <p>2. Class & Attribute Binding</p>
+        <a
+          class="bg-green-500 hover:bg-green-600 p-2 rounded-md"
+          href="/index.html"
+          >Back Home</a
+        >
+      </div>
+      <div class="text-center">
+        <button
+          :class="active ? 'text-red-500' : 'text-green-500'"
+          @click="toggle"
+        >
+          Touch Me!
+        </button>
+      </div>
+
+      <div class="mt-8 bg-blue-50 p-2 rounded-md">
+        <h1 class="font-bold">Things You Learn :</h1>
+        <ul class="list-disc list-inside">
+          <li>v-bind</li>
+          <li>v-on</li>
+          <li>methods</li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      let app = {
+        data() {
+          return { active: false };
+        },
+        methods: {
+          toggle() {
+            this.active = !this.active;
+          },
+        },
+      };
+
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>

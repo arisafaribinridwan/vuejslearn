@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body class="h-full grid place-items-center">
+    <div id="app" class="bg-violet-300 p-4 rounded-xl">
+      <div class="mb-4 flex items-center justify-between gap-4">
+        <p>3. Lists, Conditional and Computed Properties</p>
+        <a
+          class="bg-green-500 hover:bg-green-600 p-2 rounded-md"
+          href="/index.html"
+          >Back Home</a
+        >
+      </div>
+      <div class="">
+        <section
+          class="mx-2 my-4 bg-orange-100 p-2 rounded-md"
+          v-show="InProgressAssignment.length"
+        >
+          <h2 class="font-bold mb-2">InProgress</h2>
+          <ul class="list-disc list-inside">
+            <li v-for="assignment in InProgressAssignment" :key="assignment.id">
+              <label>
+                {{ assignment.name }}
+                <input type="checkbox" v-model="assignment.complete" />
+              </label>
+            </li>
+          </ul>
+        </section>
+        <section
+          class="mx-2 mb-4 mt-8 bg-green-100 p-2 rounded-md"
+          v-show="completedAssignment.length"
+        >
+          <h2 class="font-bold mb-2">Completed</h2>
+          <ul class="list-disc list-inside">
+            <li v-for="assignment in completedAssignment" :key="assignment.id">
+              <label>
+                {{ assignment.name }}
+                <input type="checkbox" v-model="assignment.complete" />
+              </label>
+            </li>
+          </ul>
+        </section>
+
+        <p>Inprogress : {{ InProgressAssignment.length}}</p>
+        <p>Completed : {{ completedAssignment.length}}</p>
+      </div>
+
+      <div class="mt-8 bg-blue-50 p-2 rounded-md">
+        <h1 class="font-bold">Things You Learn :</h1>
+        <ul class="list-disc list-inside">
+          <li>Lists or Looping Rendering</li>
+          <li>Conditional Rendering</li>
+          <li>Computed Properties</li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      let app = {
+        data() {
+          return {
+            assignments: [
+              { name: "Paint Body of Motorcycle", complete: false, id: 1 },
+              { name: "Qailullah", complete: false, id: 2 },
+              {
+                name: "Learn Vue JS - Looping, conditional and computed",
+                complete: false,
+                id: 3,
+              },
+            ],
+          };
+        },
+        computed: {
+          InProgressAssignment() {
+            return this.assignments.filter((a) => !a.complete);
+          },
+
+          completedAssignment() {
+            return this.assignments.filter((a) => a.complete);
+          },
+        },
+      };
+
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>
