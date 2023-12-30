@@ -10,7 +10,7 @@
   <body class="h-full grid place-items-center">
     <div id="app" class="bg-violet-300 p-4 rounded-xl">
       <div class="mb-4 flex items-center justify-between gap-4">
-        <p>1. Absolute Basic</p>
+        <p>4. Our First Component</p>
         <a
           class="bg-green-500 hover:bg-green-600 p-2 rounded-md"
           href="/index.html"
@@ -18,33 +18,45 @@
         >
       </div>
       <div>
-        <input
-          class="bg-slate-100 p-2 placeholder:italic"
-          type="text"
-          size="50"
-          v-model="msg"
-          placeholder="Type your words here..."
-        />
+        <app-button>Message</app-button>
       </div>
-      <div>Word : {{ msg }}</div>
-      <p>String Length : {{ msg.length }}</p>
 
       <div class="mt-8 bg-blue-50 p-2 rounded-md">
         <h1 class="font-bold">Things You Learn :</h1>
         <ul class="list-disc list-inside">
-          <li>Vue.createApp</li>
-          <li>Text interpolation</li>
-          <li>Reactivity</li>
+          <li>Component Basic</li>
         </ul>
       </div>
     </div>
     <script>
-      Vue.createApp({
-        data() {
-          return { msg: "" };
+      let app = {
+        components: {
+          "app-button": {
+            template: `
+            <button class="bg-slate-200 hover:bg-slate-500 p-2 rounded-md"
+            @click="pesan"
+            >
+              <slot />
+            </button>
+            <p>{{ message }}</p>
+            `,
+
+            data() {
+              return {
+                message: "Ini Pesan original dari kami",
+              };
+            },
+
+            methods: {
+              pesan() {
+                this.message = prompt("Masukan pesan yang baru!");
+              },
+            },
+          },
         },
-        mounted() {},
-      }).mount("#app");
+      };
+
+      Vue.createApp(app).mount("#app");
     </script>
   </body>
 </html>
